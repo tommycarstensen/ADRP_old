@@ -1,0 +1,18 @@
+\section{Identification of Informative Variants for the Chip Array}
+
+For identification of informative variants on the chip array, we will utilise a hybrid algorithm with cycles of LD based pairwise tagging, and imputation, as has been previously described.2 Only populations with at least 50 samples will be included in the chip design process, as pairwise LD evaluation would be difficult in smaller samples. Here, the term ‘population’ should be considered distinct from an ethno-linguistic group/project, and constitutes a group of individuals/samples that appear genetically homogeneous, without any significant substructure or clustering. In order to account for different sample sizes and LD differentiation among populations, we will carry out multi-population pairwise tagging, as described below. We seek only to tag common SNPs (MAF\textgreater5\%) for generation of this array.
+
+We have developed a multi-population tagging algorithm based on the algorithm TAGster for WGS data.\cite{Xu2007} The methods we used for tagging were identical to those used by TAGster; however, by using seeking and indexing approaches we were able to optimise the computational efficiency of the algorithm by an order of magnitude (unpublished data, Carstensen et al.). We briefly outline the tagging algorithm as follows (Figure 2):
+
+\begin{enumerate}
+\item Calculate LD (\textit{r}\textsuperscript{2}) between each SNP and all other SNPs in the flanking 250 KB region for each population separately. MAF thresholds are imposed at this stage, and only pairs of SNPs where both exceed the MAF threshold are included.
+\item For each SNP not already in the tagging set, a count of SNPs in the target set that are in LD exceeding a given threshold \textit{r}\textsuperscript{2} with it is generated across the genome and summed across all populations.
+\item The most informative SNP (the SNP with most target SNPs in LD with it summed across population) is chosen as the tagging SNP and added to the set of tagging SNPs.
+\item This tagging SNP and SNPs in LD with it are now removed from the set of target SNPs. This process is carried out separately for each population, so that a separate set of target SNPs is maintained for each population set. However, SNPs in LD with the tagging SNP can still be picked up as tagging SNPs themselves if they independently tag the maximum no. of SNPs in any iteration.
+Steps 2-3 are repeated until either a specified number of SNPs or all target SNPs (chosen as SNPs above a specific MAF threshold per-population) are tagged across all population sets, or until a specific number of SNPs is reached, as specified.
+
+\begin{figure}[h]
+\caption{Hybrid tagging and imputation algorithm for chip design.}
+\centering
+\includegraphics[width=4.8\paperwidth]{tagSNPselection}
+\end{figure}

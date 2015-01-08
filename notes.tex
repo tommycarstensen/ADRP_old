@@ -1,0 +1,37 @@
+Why IMPUTE2 imputation with all of 1000G?
+Does cutoff of 50 or 100 samples make difference for coverage?
+GENOTYPE_GIVEN_ALLELES on union set or just call sites using --intervals?
+Add extra tag SNPs before or after RagTagger?
+Include NA12878 in all calling to determine TS threshold?
+Do Read aware phasing with SHAPEIT2?
+Top EIGENSOFT SNPs as extra SNPs for chip?
+
+Results:
+-Show that chip does better than Omni2.5 in terms of coverage.
+--Comparison with existing chips. African Diaspora Power Chip, 700k. Comparison over MAF bins. Do r2 for chip1 and chip2 for each MAF bin. MAF,r2 plot.
+-Show that reference panel improves imputation accuracy.
+
+
+IMPUTE2 for RagTagger:
+-sample_g_ref
+-exclude_samples_g_ref
+
+Use IMPUTE2 MAF filtering to avoid wasting compute time on imputing rare variants:
+https://mathgen.stats.ox.ac.uk/impute/impute_v2.html#filtering_options
+e.g. -filt_rules_l 'eur.maf<0.05’
+
+
+What parameters did Martin use for calling the high coverage data?
+
+
+Read again:
+GATK Best Practices
+annotations
+walker doc
+
+
+Todo:
+ApplyRecalibration write with new Python module for merging sorted files….
+RagTagger: output prioritised list and show LD count per population
+gdap-wgs saf 3.29611 (SFS site allele frequency likelihood file)
+get estimates from Josh for bam improvement and variant calling?
