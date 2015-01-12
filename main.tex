@@ -1,36 +1,42 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{longtable}
-\usepackage{graphicx}
+\usepackage{longtable} % for tables
+\usepackage{graphicx} % for tables
 \usepackage[a4paper,left=20mm,right=20mm, top=3cm, bottom=3cm]{geometry}
 \usepackage{lscape}
 \usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage[table,xcdraw]{xcolor} % for tables
+\usepackage{multirow} % for tables
 
 \graphicspath{ {figures/} }
 
 \title{African Genome Diversity Reference Panel and Chip Design}
-\author{Tommy Carstensen, Martin Pollard, Deepti Gurdasani, Cristina Pomilla}
-\date{December 2014}
+\author{Tommy Carstensen, Deepti Gurdasani, Martin Pollard, Cristina Pomilla}
+\date{January 2015}
 
 \begin{document}
 
-\bibliographystyle{plain}
-\bibliography{references/references}
-
 \maketitle
-\centerline{\includegraphics[width=60mm]{sang_logo_large}}
+\centerline{\includegraphics[width=80mm]{sang_logo_large}}
 
 \include{sections/1rationale}
 \include{sections/2datasetsummary}
 \include{sections/3curation}
 \include{sections/4merging}
 %\include{sections/5evalcaller}
-\include{sections/5tagSNPselection}
+\include{sections/6tagSNPselection}
+\include{sections/7variantcaller_evaluation}
+\include{sections/8validation}
 
-We don't filter based on the percentage of mapped reads. Instead we filter based on heterozygosity. The two parameters are related.
+\bibliographystyle{unsrt}%Used BibTeX style is unsrt
+\bibliography{references/references}
 
-“Version 4 has multiple improvements: support for multi-allelic markers” – BEAGLE4 site
+%We don't filter based on the percentage of mapped reads. Instead we filter based on heterozygosity. The two parameters are related.
 
-An improved method for calling genotypes and phasing low-coverage data when one also has chip data is to phase the chip data to make a haplotype scaffold and then phase the sequence data onto the scaffold. Both steps are carried out with SHAPEIT2.
+%“Version 4 has multiple improvements: support for multi-allelic markers” – BEAGLE4 site
+
+%An improved method for calling genotypes and phasing low-coverage data when one also has chip data is to phase the chip data to make a haplotype scaffold and then phase the sequence data onto the scaffold. Both steps are carried out with SHAPEIT2.
 
 \end{document}

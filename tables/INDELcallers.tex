@@ -1,0 +1,58 @@
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+Name & Year & 1000G & GoNL & Method & de novo assembly & Length & Status \\ \hline
+%http://homepages.cwi.nl/~as/software.html
+%Mendelian-inheritance-aware discovery and genotyping of midsize and long indels
+%.nl
+MATE-CLEVER\cite{Marschall2013} & 2014 & & 1-20bp, 20-100bp, \textgreater100bp & read pair / split read  & 1-20bp & \\ \hline
+%Pindel good according to ClipCrop paper
+%"Pindel only works well for high coverage data, but does not perform well at low coverage." - GINDEL paper
+%does Pindel report genotypes?
+%http://gmt.genome.wustl.edu/packages/pindel/
+Pindel\cite{Ye2009} & 2014 & SV \textgreater50bp & 1-20bp, 20-100bp, /textgreater100 (v0.2.4) & pattern growth? split read &  & 1bp- & Develop \\ \hline
+%"Pindel only works well for high coverage data, but does not perform well at low coverage." - GINDEL paper
+%"Genome STRiP performs less well for shorter deletions (50–200 bp)" - GINDEL paper
+%http://www.engr.uconn.edu/~ywu/
+GINDEL\cite{Chu2014GINDEL} & 2014 & No & No &  &  &  \\ \hline
+%"Genome STRiP performs less well for shorter deletions (50–200 bp)" - GINDEL paper
+%Support for accessing bam files over http, ftp and s3.
+%http://www.broadinstitute.org/software/genomestrip/genome-strip
+GenomeSTRiP & 2013 & SV \textgreater50bp & 1-20bp, 20-100bp, \textgreater100bp (v1.04.915) & read depth / read pair &  & \\ \hline
+% Dindel sensitivity good for low coverage data according to Neuman2012
+%https://www.sanger.ac.uk/resources/software/dindel/
+Dindel2\cite{Albers01062011} & 2011 & indels & & Bayesian, short-read data & No & \textless50bp \\ \hline
+%samtools emits left aligned INDELs
+samtools\cite{Li2009} & 2014 & indels &  &  &  & & Develop \\ \hline
+FreeBayes & 2014 & Yes &  & Larger INDELs with local assembly &  &  \\ \hline
+%Platypus compared to GATK UG, HC and SAMtools
+%Platypus emits left aligned INDELs
+%evaluated on the high coverage NA12878 trio
+%evlauated against fosmid data (ref26)
+Platypus\cite{Rimmer2014} & 2014 & indels &  & Local assembly &  & Deletions\textgreater1kb, insertions~300bp & Develop \\ \hline
+SOAPIndel/SOAPdenovo & 2014 & & 1-20bp, 20-100bp, \textgreater100bp & de novo assembly of unmapped reads with mapped partner & Yes & \textlessread length & Develop \\ \hline
+%Cortex does not require prior mapping
+Cortex\cite{Iqbal2012Cortex} & 2013 & Yes &  & reference-free sequence assembly & Yes, Global &  \\ \hline
+%GATK emits left aligned INDELs
+GATK HaplotypeCaller & 2014 & No & No & Local reassembly & Yes, Local & 1-100bp & Develop \\ \hline
+123SV & 2011 & & 20-100bp, \textgreater100bp (v0.9) & read pair &  & \textgreater100bp \\ \hline
+DWACSeq & & & \textgreater100bp (v0.7) & read depth based &  & \\ \hline
+CNVnator & 2014 & SV \textgreater50bp & \textgreater100bp (v0.2.2) & depth of coverage approach &  & \textgreater window size (e.g. 100) \\ \hline
+FACADE & &  & \textgreater100bp & read depth based &  & \\ \hline
+%VarScan2.2.2 Not good according to Neuman2012 (figure 4)
+%VarScan worse than Dindel (sens and FDR) according to Dindel paper
+VarScan\cite{Koboldt01032012} & &  &  &  &  &  \\ \hline
+%UG does poorly for low coverage data according to Neuman2012 (figure 4)
+GATK UnifiedGenotyper & 2013 &  & 1-20bp, 20-100bp (2.1.8) &  &  & & Abandon  \\ \hline
+%BreakDancer Not good according to ClipCrop paper
+%Trios only! Used for trios in GoNL paper.
+BreakDancer & & SV \textgreater50bp & 20-100bp, \textgreater100bp (v1.1) & Discordant/read pair approach &  & 20-100bp \\ \hline
+ClipCrop & 2011 & &  &  &  & & Abandon \\ \hline
+DELLY & & SV \textgreater50bp &  &  &  & & \\ \hline
+\end{tabular}
+}
+\caption{Characteristics of INDEL callers. Year refers to latest release/update.}
+\label{INDELcallers}
+\end{table}

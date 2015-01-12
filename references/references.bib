@@ -1,0 +1,83 @@
+@article{OConnell2014,
+    author = {O'Connell, , Jared AND Gurdasani, , Deepti AND Delaneau, , Olivier AND Pirastu, , Nicola AND Ulivi, , Sheila AND Cocca, , Massimiliano AND Traglia, , Michela AND Huang, , Jie AND Huffman, , Jennifer E. AND Rudan, , Igor AND McQuillan, , Ruth AND Fraser, , Ross M. AND Campbell, , Harry AND Polasek, , Ozren AND Asiki, , Gershim AND Ekoru, , Kenneth AND Hayward, , Caroline AND Wright, , Alan F. AND Vitart, , Veronique AND Navarro, , Pau AND Zagury, , Jean-Francois AND Wilson, , James F. AND Toniolo, , Daniela AND Gasparini, , Paolo AND Soranzo, , Nicole AND Sandhu, , Manjinder S. AND Marchini, , Jonathan},
+    journal = {PLoS Genet},
+    publisher = {Public Library of Science},
+    title = {A General Approach for Haplotype Phasing across the Full Spectrum of Relatedness},
+    year = {2014},
+    month = {04},
+    volume = {10},
+    url = {http://dx.doi.org/10.1371%2Fjournal.pgen.1004234},
+    pages = {e1004234},
+    abstract = {<title>Author Summary</title> <p>Every individual carries two copies of each chromosome (haplotypes), one from each of their parents, that consist of a long sequence of alleles. Modern genotyping technologies do not measure haplotypes directly, but the combined sum (or genotype) of alleles at each site. Statistical methods are needed to infer (or phase) the haplotypes from the observed genotypes. Haplotype estimation is a key first step of many disease and population genetic studies. Much recent work in this area has focused on phasing in cohorts of nominally unrelated individuals. So called ‘long range phasing’ is a relatively recent concept for phasing individuals with intermediate levels of relatedness, such as cohorts taken from population isolates. Methods also exist for phasing genotypes for individuals within explicit pedigrees. Whilst high quality phasing techniques are available for each of these demographic scenarios, to date, no single method is applicable to all three. In this paper, we present a general approach for phasing cohorts that contain any level of relatedness between the study individuals. We demonstrate high levels of accuracy in all demographic scenarios, as well as the ability to detect (Mendelian consistent) genotyping error and recombination events in duos and trios, the first method with such a capability.</p>},
+    number = {4},
+    doi = {10.1371/journal.pgen.1004234}
+}
+
+@article{Manichaikul15112010,
+note = {KING: Kinship-based INference for Gwas},
+author = {Manichaikul, Ani and Mychaleckyj, Josyf C. and Rich, Stephen S. and Daly, Kathy and Sale, Michèle and Chen, Wei-Min}, 
+title = {Robust relationship inference in genome-wide association studies},
+volume = {26}, 
+number = {22}, 
+pages = {2867-2873}, 
+year = {2010}, 
+doi = {10.1093/bioinformatics/btq559}, 
+abstract ={Motivation: Genome-wide association studies (GWASs) have been widely used to map loci contributing to variation in complex traits and risk of diseases in humans. Accurate specification of familial relationships is crucial for family-based GWAS, as well as in population-based GWAS with unknown (or unrecognized) family structure. The family structure in a GWAS should be routinely investigated using the SNP data prior to the analysis of population structure or phenotype. Existing algorithms for relationship inference have a major weakness of estimating allele frequencies at each SNP from the entire sample, under a strong assumption of homogeneous population structure. This assumption is often untenable.Results: Here, we present a rapid algorithm for relationship inference using high-throughput genotype data typical of GWAS that allows the presence of unknown population substructure. The relationship of any pair of individuals can be precisely inferred by robust estimation of their kinship coefficient, independent of sample composition or population structure (sample invariance). We present simulation experiments to demonstrate that the algorithm has sufficient power to provide reliable inference on millions of unrelated pairs and thousands of relative pairs (up to 3rd-degree relationships). Application of our robust algorithm to HapMap and GWAS datasets demonstrates that it performs properly even under extreme population stratification, while algorithms assuming a homogeneous population give systematically biased results. Our extremely efficient implementation performs relationship inference on millions of pairs of individuals in a matter of minutes, dozens of times faster than the most efficient existing algorithm known to us.Availability: Our robust relationship inference algorithm is implemented in a freely available software package, KING, available for download at http://people.virginia.edu/∼wc9c/KING.Contact: wmchen@virginia.eduSupplementary information: Supplementary data are available at Bioinformatics online.}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/26/22/2867.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/26/22/2867.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+@article{Menelaou2013,
+note = {MVNCall},
+author = {Menelaou, Androniki and Marchini, Jonathan}, 
+title = {Genotype calling and phasing using next-generation sequencing reads and a haplotype scaffold},
+volume = {29}, 
+number = {1}, 
+pages = {84-91}, 
+year = {2013}, 
+doi = {10.1093/bioinformatics/bts632}, 
+abstract ={Motivation: Given the current costs of next-generation sequencing, large studies carry out low-coverage sequencing followed by application of methods that leverage linkage disequilibrium to infer genotypes. We propose a novel method that assumes study samples are sequenced at low coverage and genotyped on a genome-wide microarray, as in the 1000 Genomes Project (1KGP). We assume polymorphic sites have been detected from the sequencing data and that genotype likelihoods are available at these sites. We also assume that the microarray genotypes have been phased to construct a haplotype scaffold. We then phase each polymorphic site using an MCMC algorithm that iteratively updates the unobserved alleles based on the genotype likelihoods at that site and local haplotype information. We use a multivariate normal model to capture both allele frequency and linkage disequilibrium information around each site. When sequencing data are available from trios, Mendelian transmission constraints are easily accommodated into the updates. The method is highly parallelizable, as it analyses one position at a time.Results: We illustrate the performance of the method compared with other methods using data from Phase 1 of the 1KGP in terms of genotype accuracy, phasing accuracy and downstream imputation performance. We show that the haplotype panel we infer in African samples, which was based on a trio-phased scaffold, increases downstream imputation accuracy for rare variants (R2 increases by >0.05 for minor allele frequency <1%), and this will translate into a boost in power to detect associations. These results highlight the value of incorporating microarray genotypes when calling variants from next-generation sequence data.Availability: The method (called MVNcall) is implemented in a C++ program and is available from http://www.stats.ox.ac.uk/∼marchini/#software.Contact: marchini@stats.ox.ac.ukSupplementary information: Supplementary data are available at Bioinformatics online.}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/29/1/84.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/29/1/84.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+
+
+@article{Zook2014,
+	Annote = {Clinical adoption of human genome sequencing requires methods that output genotypes with known accuracy at millions or billions of positions across a genome. Because of substantial discordance among calls made by existing sequencing methods and algorithms, there is a need for a highly accurate set of genotypes across a genome that can be used as a benchmark. Here we present methods to make high-confidence, single-nucleotide polymorphism (SNP), indel and homozygous reference genotype calls for NA12878, the pilot genome for the Genome in a Bottle Consortium. We minimize bias toward any method by integrating and arbitrating between 14 data sets from five sequencing technologies, seven read mappers and three variant callers. We identify regions for which no confident genotype call could be made, and classify them into different categories based on reasons for uncertainty. Our genotype calls are publicly available on the Genome Comparison and Analytic Testing website to enable real-time benchmarking of any method.},
+	Author = {Zook, Justin M and Chapman, Brad and Wang, Jason and Mittelman, David and Hofmann, Oliver and Hide, Winston and Salit, Marc},
+	Date = {2014/03//print},
+	Date-Added = {2015-01-08 11:02:30 +0000},
+	Date-Modified = {2015-01-08 11:02:30 +0000},
+	Isbn = {1087-0156},
+	Journal = {Nat Biotech},
+	L3 = {10.1038/nbt.2835; http://www.nature.com/nbt/journal/v32/n3/abs/nbt.2835.html#supplementary-information},
+	M3 = {Computational Biology},
+	Month = {03},
+	Number = {3},
+	Pages = {246--251},
+	Publisher = {Nature Publishing Group, a division of Macmillan Publishers Limited. All Rights Reserved.},
+	Title = {Integrating human sequence data sets provides a resource of benchmark SNP and indel genotype calls},
+	Ty = {JOUR},
+	Url = {http://dx.doi.org/10.1038/nbt.2835},
+	Volume = {32},
+	Year = {2014},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1038/nbt.2835}}
+
+
+@article{Xu2007,
+note = {TAGster},
+author = {Xu, Zongli and Kaplan, Norman L. and Taylor, Jack A.}, 
+title = {TAGster: efficient selection of LD tag SNPs in single or multiple populations},
+volume = {23}, 
+number = {23}, 
+pages = {3254-3255}, 
+year = {2007}, 
+doi = {10.1093/bioinformatics/btm426}, 
+abstract ={Summary: Genetic association studies increasingly rely on the use of linkage disequilibrium (LD) tag SNPs to reduce genotyping costs. We developed a software package TAGster to select, evaluate and visualize LD tag SNPs both for single and multiple populations. We implement several strategies to improve the efficiency of current LD tag SNP selection algorithms: (1) we modify the tag SNP selection procedure of Carlson et al. to improve selection efficiency and further generalize it to multiple populations. (2) We propose a redundant SNP elimination step to speed up the exhaustive tag SNP search algorithm proposed by Qin et al. (3) We present an additional multiple population tag SNP selection algorithm based on the framework of Howie et al., but using our modified exhaustive search procedure. We evaluate these methods using resequenced candidate gene data from the Environmental Genome Project and show improvements in both computational and tagging efficiency.Availability: The software Package TAGster is freely available at http://www.niehs.nih.gov/research/resources/software/tagster/Contact: taylor@niehs.nih.govSupplementary information: Additional information, including a tutorial, detailed algorithm and detailed evaluation results, is also available from TAGster web site (see above).}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/23/23/3254.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/23/23/3254.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
