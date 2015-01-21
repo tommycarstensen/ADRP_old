@@ -1,13 +1,16 @@
 \section{Generation of haplotypes from raw reads}
 Given the need to include large sample sizes from diverse populations for such a resource for development of an African chip, curation of data will involve generation of homogenised data from different datasets, including publicly available data as outlined in Table 1. Given the heterogeneity in sequencing and coverage among datasets (Table 1), these will need to be processed in subsets, and then merged to generate a complete panel of all variants. 
 
-Publicly available curated data, such as reads (bam files) and variant calls (vcf files) from the \href{http://www.1000genomes.org}{1000 Genomes project}, HGDP and the \href{http://www.simonsfoundation.org/}{Simon’s Foundation} will be used as such. For datasets that are sequenced in house, consistent methods will be used for curation.
+Publicly available curated data, such as reads (bam files) and variant calls (vcf files) from the \href{http://www.1000genomes.org}{1000 Genomes project} and HGDP
+%and the \href{http://www.simonsfoundation.org/}{Simon’s Foundation}
+will be used as such. For datasets that are sequenced in house, consistent methods will be used for curation.
 
 \subsection{Alignment and preprocessing of reads}
 Following generation of raw reads mapping will be carried out to the human reference genome (GRCh37) using the BWA-MEM algorithm of the BWA software package, which is suitable for Illumina reads longer than 70bp.\cite{2013arXiv1303.3997L} Optical and PCR duplicate reads will be marked with Picard MarkDuplicates on a lanelet level. The reads will be sorted by coordinate with samtools sort. The lanelets will be merged to a library level with Picard MergeSamFiles, and duplicate reads will be marked on a library level. The BAMs will be merged to a sample level and then sample level bam improvement will be carried out using GATKv2.8+. This process will consist of a per-sample realignment of reads around known and discovered indels with GATK RealignerTargetCreator and IndelRealigner in addition to base quality score recalibration (BQSR) with GATK BaseRecalibrator and PrintReads.
 
 \subsection{Quality control prior to variant calling}
-We require that the percentage of aligned reads is 90\% or greater, which we check with samtools flagstat. Prior to variant calling we check for contamination and sample mix up with VerifyBamID and require that the calculated FREEMIX is less than 0.05. Prior to variant calling we check the gender of the samples with GATK3.3+ DepthOfCoverage and require that the ratio between the non-PAR X and Y coverage is less than 2 and greater than 5 for males and females, respectively.
+We require that the percentage of aligned reads is 90\% or greater, which we check with samtools flagstat. Prior to variant calling we check for contamination and sample mix up with VerifyBamID and require that the calculated FREEMIX is less than 0.05.
+%Prior to variant calling we check the gender of the samples with GATK3.3+ DepthOfCoverage and require that the ratio between the non-PAR X and Y coverage is less than 2 and greater than 5 for males and females, respectively.
 
 \input{sections/curation/caller_eval}
 
