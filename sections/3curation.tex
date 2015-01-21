@@ -1,7 +1,7 @@
-\section{Curation}
+\section{Generation of haplotypes from raw reads}
 Given the need to include large sample sizes from diverse populations for such a resource for development of an African chip, curation of data will involve generation of homogenised data from different datasets, including publicly available data as outlined in Table 1. Given the heterogeneity in sequencing and coverage among datasets (Table 1), these will need to be processed in subsets, and then merged to generate a complete panel of all variants. 
 
-Publicly available curated data, such as from the \href{http://www.1000genomes.org}{1000 Genomes project}, HGDP and the \href{http://www.simonsfoundation.org/}{Simon’s Foundation} will be used as such. For datasets that are sequenced in house, consistent methods will be used for curation.
+Publicly available curated data, such as reads (bam files) and variant calls (vcf files) from the \href{http://www.1000genomes.org}{1000 Genomes project}, HGDP and the \href{http://www.simonsfoundation.org/}{Simon’s Foundation} will be used as such. For datasets that are sequenced in house, consistent methods will be used for curation.
 
 \subsection{Alignment and preprocessing of reads}
 Following generation of raw reads mapping will be carried out to the human reference genome (GRCh37) using the BWA-MEM algorithm of the BWA software package, which is suitable for Illumina reads longer than 70bp.\cite{2013arXiv1303.3997L} Optical and PCR duplicate reads will be marked with Picard MarkDuplicates on a lanelet level. The reads will be sorted by coordinate with samtools sort. The lanelets will be merged to a library level with Picard MergeSamFiles, and duplicate reads will be marked on a library level. The BAMs will be merged to a sample level and then sample level bam improvement will be carried out using GATKv2.8+. This process will consist of a per-sample realignment of reads around known and discovered indels with GATK RealignerTargetCreator and IndelRealigner in addition to base quality score recalibration (BQSR) with GATK BaseRecalibrator and PrintReads.
@@ -9,60 +9,12 @@ Following generation of raw reads mapping will be carried out to the human refer
 \subsection{Quality control prior to variant calling}
 We require that the percentage of aligned reads is 90\% or greater, which we check with samtools flagstat. Prior to variant calling we check for contamination and sample mix up with VerifyBamID and require that the calculated FREEMIX is less than 0.05. Prior to variant calling we check the gender of the samples with GATK3.3+ DepthOfCoverage and require that the ratio between the non-PAR X and Y coverage is less than 2 and greater than 5 for males and females, respectively.
 
-\subsection{Variant calling}
+\input{sections/curation/caller_eval}
 
-The GiaB sample will be included for selection of a filtering threshold, which yields a good balance between sensitivity and specificity after filtering. 
+\input{sections/curation/calling}
 
-Prior to variant calling across all datasets we determined the best variant calling and filtering method for African low coverage data. Specifically variant calling was carried out for chromosome 20 of 1986 Ugandan low coverage samples using several algorithms; samtools, GATK HaplotypeCaller (HC) and GATK UnifiedGenotyper (UG). To make assesment of the sensitivity and specificity for SNPs for each variant caller possible calling was carried out with a sample sequenced at similar coverage from the \href{http://genomeinabottle.org}{Genome in a Bottle (GiaB)} highly curated set. PCR-free reads will be used for the validation sample to avoid PCR artefacts. The GiaB sample (NA12878) represents a CEU sample from a 12 person pedigree in 1000G that has gone through extensive curation and validation of variants.\cite{Zook2014} The software with the greatest area under the ROC (sensitivity, 1-specificity) curve will be used for calling SNPs from the low coverage data.
-%These callers may be different for SNPs, short indels and SVs. Calling and filtering of SNPs, indels and long deletions will be carried out separately using the chosen algorithm(s), with filtering thresholds chosen for SNPs and short indels based on the sensitivity and specificity on the platinum genomes sample.
-%Datasets generated with unique Illumina chemistry, and those with different coverages will need to be called in separate subsets. GATK3.3+ UnifiedGenotyper (UG) and GATK3.3+ HaplotypeCaller (HC) will be used for calling SNPs from low and high coverage data, respectively. Multiple samples will be called simultaneously with UnifiedGenotyper, whereas HaplotypeCaller will be applied to individual samples in GVCF mode and subsequently joint genotyping will be carried out with GenotypeGVCFs. For compatibility reasons it is important that the same versions of HaplotypeCaller and GenotypeGVCFs are used.
-%http://gatkforums.broadinstitute.org/discussion/5051/are-gatk-versions-3-compatible
-During variant calling UG by default downsamples each sample randomly to a maximum coverage of 250 (--downsampling\_type BY\_SAMPLE and --downsample\_to\_coverage 250). We will use the default minimum base quality for UG, which is currently 17 (--min\_base\_quality\_score 17). %10 for HC
-At each site we don't call more than the 6 best alternate alleles (--max\_alternate\_alleles 6). For high coverage data we use calling and emission thresholds of 30 (--standard\_min\_confidence\_threshold\_for\_calling 30 and --standard\_min\_confidence\_threshold\_for\_emitting 30) in accordance with GATK best practices. For low coverage data we use thresholds of 10 and 4 if the sample count is greater than and less than 100, respectively.
-%Indels will be called with a plethora of software packages (see the next section).
+\input{sections/curation/filtering}
 
-If pedigree information is available, then this will be used by UnifiedGenotyper %and GenotypeGVCFs
-in calculation of the InbreedingCoeff annotation, which is used for subsequent variant filtering. Pedigree information will also be used for refinement and phasing. Incomplete pedigrees will be inferred from IBD matrices for sequenced and non-sequenced samples in each cohort.
+\input{sections/curation/merging}
 
-%\input{sections/indelcalling}
-
-\subsubsection{Calling of chromosomes X and Y and mtDNA}
-The X chromosome will be called separately for males and females with different ploidies. The pseudoautosomal regions (PARs) 1 and 2 will however be called like the autosomes; i.e. jointly for males and females with all samples treated as diploid. The Y chromosome will be treated as haploid and variant calling will only be carried out for males. The PARs on the Y chromosome are masked in the reference sequence and not subject to calling. The mitochondrial variants will be called with GATK, VarScan2\cite{Koboldt2012} and MitoSeek and the union set recalled and annotated with GATK prior to filtering. VarScan is chosen, because it performs well at extreme read depths.\cite{Stead2013} MitoSeek is a software package dedicated to calling variants from mtDNA reads. When calling with GATK the ploidy will be set to the mean coverage in the MT contig divided by the mean coverage in the somatic chromosomes.
-%http://gatkforums.broadinstitute.org/discussion/1214/can-i-use-gatk-on-non-diploid-organisms
-%GoNL - "Consensus sequences were called by GATK."
-
-\begin{table}[h]
-\centering
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-\rowcolor[HTML]{FFFFFF} 
-                          & Male & Female \\ \hline
-\multicolumn{1}{|l|}{X}   & 1    & 2      \\ \hline
-\multicolumn{1}{|l|}{Y}   & 1    & N/A    \\ \hline
-\multicolumn{1}{|l|}{PAR} & 2    & 2      \\ \hline 
-\end{tabular}
-\caption{Ploidies used for calling variants on the sex chromosomes.}
-\label{table:XYcalling}
-\end{table}
-
-\subsection{Variant Filtering}
-Filtering of SNPs and short indels will be carried out with GATK3.3+ VariantRecalibrator, which does variant quality score recalibration (VQSR). VQSR will be applied simultaneously across the autosomes and the sex chromosomes despite these having different coverages and some annotations being dependent on read depth. GATK best practices will be used for SNP and INDELs.
-%http://gatkforums.broadinstitute.org/discussion/1259/which-training-sets-arguments-should-i-use-for-running-vqsr
-For SNPs we will use HapMap III and 1000G phase 1 Omni2.5 sites as truth and training sets (prior probabilities of 15 and 12). High confidence 1000G phase 1 SNPs will be used as an additional training set (prior 10). This dataset does not contain Y chromosome variants. For indels we will use the Mills and Devine and 1000G gold standard as a truth and training set (prior 12). In both cases dbSNP138 or newer will act as a set of known sites.
-To build our VQSR Gaussian mixture model we use annotations at each site related to coverage (QD=QualByDepth and DP), strand bias (FS=FisherStrand, SOR=StrandOddsRatio), mapping quality (MQ, MQRankSum, ReadPosRankSum). For indels we use the same annotations, except for MQ being left out.
-DP is the approximate read depth after filtering reads with poor mapping quality and bad mates. QD is the variant confidence normalized by the unfiltered depth for the variant allele. FS is a Phred-scaled p-value using Fisher's exact test to detect strand bias. SOR is the odds ratio of a 2x2 contingency table (rows and columns are positive/negative strand and reference/alternate allele) to detect strand bias. MQ is the RMS of the mapping qualities, which serves an an average across reads and samples. MQRankSum is the Z-score from a Wilcoxon rank sum test of alternate vs. reference mapping qualities. ReadPosRankSum is the Z-score from a Wilcoxon rank sum test of alternate vs. reference read position biases.
-
-ROC curves will be generated for sample NA12878, for which SNPs and short INDELs are available for chromosomes 1-22 and X from NIST. The ROC curves will be sorted by the variant quality score log odds ratios calculated by VariantRecalibrator. For structural variants we will use PacBio 54x NA12878 WGS data as a truth set.
-%ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/working/20131209_na12878_pacbio/si/
-
-For cohorts with 10 or more founder samples the InbreedingCoeff annotation will also be used. It is a likelihood-based Hardy-Weinberg test for the inbreeding among samples. It will be tested by generation of additional ROC curves, whether the inclusion of the InbreedingCoeff annotation worsens the ability to do VQSR correctly, when there are many related samples.
-
-When not doing variant calling with HaplotypeCaller we will also use the annotation HaplotypeScore, which is a statistical measure of more than 2 haplotypes being present at the same site for a sample.
-
-We do a binary heap merge of unfiltered variants to allow two VQSR processes to run simultaneously; i.e. one for SNPs and one for indels.
-
-Unlike 1000G and GoNL we will not filter out multiallelic variants, because we don't find them to be of lower quality than biallelic SNPs and because there is a greater probability of these appearing across thousands of samples from multiple populations from the African continent than in hundreds of samples from one European country. For example 1 in every ~50 SNP in ~2000 Ugandan samples sequenced to a depth of 4x is multiallelic.
-%They probably did this, because Beagle3 didn't support multiallelic variants...
-
-\subsection{QC after variant calling}
-If SNP array data is available, we further check after variant calling that the concordance between chip and sequence genotypes is greater than 0.98 for each sample. We check for heterozygosity outliers (\textgreater3SD) and PCA outliers after variant calling.
+\input{sections/curation/refinement}

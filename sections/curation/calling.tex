@@ -1,0 +1,20 @@
+\subsection{Variant calling}
+After deciding on the best software we will carry out variant calling.
+%Datasets generated with unique Illumina chemistry, and those with different coverages will need to be called in separate subsets. GATK3.3+ UnifiedGenotyper (UG) and GATK3.3+ HaplotypeCaller (HC) will be used for calling SNPs from low and high coverage data, respectively. Multiple samples will be called simultaneously with UnifiedGenotyper, whereas HaplotypeCaller will be applied to individual samples in GVCF mode and subsequently joint genotyping will be carried out with GenotypeGVCFs. For compatibility reasons it is important that the same versions of HaplotypeCaller and GenotypeGVCFs are used.
+%http://gatkforums.broadinstitute.org/discussion/5051/are-gatk-versions-3-compatible
+During variant calling UG by default downsamples each sample randomly to a maximum coverage of 250 (--downsampling\_type BY\_SAMPLE and --downsample\_to\_coverage 250). We will use the default minimum base quality for UG, which is currently 17 (--min\_base\_quality\_score 17). %10 for HC
+At each site we don't call more than the 6 best alternate alleles (--max\_alternate\_alleles 6). For high coverage data we use calling and emission thresholds of 30 (--standard\_min\_confidence\_threshold\_for\_calling 30 and --standard\_min\_confidence\_threshold\_for\_emitting 30) in accordance with GATK best practices. For low coverage data we use thresholds of 10 and 4 if the sample count is greater than and less than 100, respectively.
+%Indels will be called with a plethora of software packages (see the next section).
+
+%If pedigree information is available, then this will be used by UnifiedGenotyper %and GenotypeGVCFs
+%in calculation of the InbreedingCoeff annotation, which is used for subsequent variant filtering. Pedigree information will also be used for refinement and phasing. Incomplete pedigrees will be inferred from IBD matrices for sequenced and non-sequenced samples in each cohort.
+
+%\input{sections/curation/indelcalling}
+
+\subsubsection{Calling of chromosomes X and Y}
+The X chromosome will be called jointly for males and females with the same ploidy, because the memory and CPU use of UG otherwise grows intensely. Likewise the pseudoautosomal regions (PARs) 1 and 2 on the X chromosome will be called like the autosomes; i.e. jointly for males and females with all samples treated as diploid. The Y chromosome will also be treated as diploid due to the UG memory and CPU issue, when doing haploid variant calling, but variant calling will only be carried out for males. The PARs on the Y chromosome are masked in the reference sequence and not subject to calling. An excessive number of heterezogyous calls of haploid genotypes can be utilized for a QC step of sites and samples; thresholds to be decided.
+%The mitochondrial variants will be called with GATK, VarScan2\cite{Koboldt2012} and MitoSeek and the union set recalled and annotated with GATK prior to filtering. VarScan is chosen, because it performs well at extreme read depths.\cite{Stead2013} MitoSeek is a software package dedicated to calling variants from mtDNA reads. When calling with GATK the ploidy will be set to the mean coverage in the MT contig divided by the mean coverage in the somatic chromosomes.
+%http://gatkforums.broadinstitute.org/discussion/1214/can-i-use-gatk-on-non-diploid-organisms
+%GoNL - "Consensus sequences were called by GATK."
+
+%\input{tables/ploidies}
