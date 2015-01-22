@@ -3,7 +3,7 @@ Following curation of individual datasets, these will need to be merged to homog
 %and 3) variants called from reads aligned to build 38 will be lifted over to build 37 (liftOver). %http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver
 Variants will be merged across cohorts (GATK CombineVariants --minimalVCF or bcftools merge | bcftools view -G). These sites will then be recalled in each dataset to generate genotype likelihoods at these sites.
 %Where necessary the union set of sites will be lifted over to build 38 prior to recalling and the recalled variants will then be lifted back over to build 37.
-UG and HC (--genotyping\_mode GENOTYPE\_GIVEN\_ALLELES and --output\_mode EMIT\_ALL\_SITES) will be used for recalling of low and high coverage data, respectively.
+UG (--genotyping\_mode GENOTYPE\_GIVEN\_ALLELES and --output\_mode EMIT\_ALL\_SITES) will be used for recalling low coverage data.
 %http://gatkforums.broadinstitute.org/discussion/4936/not-all-sites-emitted-with-genotype-given-alleles
 The maximum number of allowed alternate alleles will be increased from the default 6 by multiplication with the number of original cohorts to allow all true variants to be called. Although it should only be necessary for HaplotypeCaller, interval padding will be added to ensure all known sites are called (--interval\_padding 100).
 %http://gatkforums.broadinstitute.org/discussion/comment/18353

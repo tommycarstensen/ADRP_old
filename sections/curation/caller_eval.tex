@@ -22,22 +22,6 @@ We calculated the sensitivity and specificity of calls relative to the highly cu
     \end{subfigure}%
 \end{figure}
 
-For high coverage data, we evaluated the NA12878 sample alone re-sequenced on the X-10 pipeline with the highly curated set of variants produced by GiaB.1 We showed that the X-10 and the new pipeline used with it produced high quality data that when normalised showed a high degree of sensitivity versus the GiaB reference set and a low false discovery rate (Table \ref{table:highcoverage}). When the Illumina 50x Platinum set, sequenced on the Illumina Hiseq 2000 platform was reprocessed through the same pipeline it produced similarly high results, though the INDEL sensitivity and false discovery rate were slightly better. We believe this may be because of the higher coverage and PCR free library preparation used in the creation of this sequence.
+%For high coverage data, we evaluated the NA12878 sample alone re-sequenced on the X-10 pipeline with the highly curated set of variants produced by GiaB.1 We showed that the X-10 and the new pipeline used with it produced high quality data that when normalised showed a high degree of sensitivity versus the GiaB reference set and a low false discovery rate (Table \ref{table:FDRhigh}). When the Illumina 50x Platinum set, sequenced on the Illumina Hiseq 2000 platform was reprocessed through the same pipeline it produced similarly high results, though the INDEL sensitivity and false discovery rate were slightly better. We believe this may be because of the higher coverage and PCR free library preparation used in the creation of this sequence.
 
-\begin{table}[h]
-\centering
-%\resizebox{\textwidth}{!}{%
-\begin{tabular}{l|lrrrrr}
-\rowcolor[HTML]{333333} 
-{\color[HTML]{FFFFFF} Sample} & {\color[HTML]{FFFFFF} Type} & {\color[HTML]{FFFFFF} TP} & {\color[HTML]{FFFFFF} FP} & {\color[HTML]{FFFFFF} FN} & {\color[HTML]{FFFFFF} Sensitivity} & {\color[HTML]{FFFFFF} FDR} \\
- & \cellcolor[HTML]{C0C0C0}SNP & \cellcolor[HTML]{C0C0C0}2914294 & \cellcolor[HTML]{C0C0C0}28213 & \cellcolor[HTML]{C0C0C0}10266 & \cellcolor[HTML]{C0C0C0}0.9965 & \cellcolor[HTML]{C0C0C0}0.0096 \\
-\multirow{-2}{*}{Replicate 1} & INDEL & 413639 & 23145 & 34743 & 0.9255 & 0.0530 \\
- & \cellcolor[HTML]{C0C0C0}SNP & \cellcolor[HTML]{C0C0C0}2908260 & \cellcolor[HTML]{C0C0C0}26311 & \cellcolor[HTML]{C0C0C0}14452 & \cellcolor[HTML]{C0C0C0}0.9951 & \cellcolor[HTML]{C0C0C0}0.0090 \\
-\multirow{-2}{*}{Replicate 2} & INDEL & 393431 & 24110 & 52542 & 0.8822 & 0.0577 \\
- & \cellcolor[HTML]{C0C0C0}SNP & \cellcolor[HTML]{C0C0C0}2917290 & \cellcolor[HTML]{C0C0C0}21400 & \cellcolor[HTML]{C0C0C0}9844 & \cellcolor[HTML]{C0C0C0}0.9966 & \cellcolor[HTML]{C0C0C0}0.0073 \\
-\multirow{-2}{*}{Platinum} & INDEL & 437875 & 8802 & 2297 & 0.9948 & 0.0197
-\end{tabular}
-%}
-\caption{Intersect of NA12878 samples with GiaB reference calls version 0.2.}
-\label{table:FDRhigh}
-\end{table}
+%\input{tables/FDRhigh}

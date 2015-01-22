@@ -5,5 +5,4 @@ We carry out genotype refinement and phasing with SHAPEIT2.\cite{Delaneau2012} I
 %2014Delaneau - "It has been observed that the Beagle method does not have this property, and that Thunder and Impute2 benefit from using an initial set of haplotypes estimated via Beagle."
 %2014Delaneu - "This approach generalizes our MVNcall, approach which is designed to phase one variant site at a time onto a haplotype scaffold, and improves upon its accuracy, by phasing multiple sites jointly onto the scaffold and using a more sophisticated underlying model."
 
-\subsection{Quality control after variant calling and genotype refinement}
-If SNP array data is available, we further check after genotype refinement with Beagle4 that the concordance between chip and sequence genotypes is greater than 0.98 for each sample. We also check for heterozygosity outliers (\textgreater3SD) and PCA outliers after genotype refinement. Variant calling and genotype refinement is repeated if a sample either fails the check of genotype concordance, which is a sign of poor data quality, or fails the check of heterozygosity, which can be a sign of sample contamination or a population outlier.
+%% https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html#gcall

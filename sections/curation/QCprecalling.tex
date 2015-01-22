@@ -1,0 +1,3 @@
+\subsection{Quality control prior to variant calling}
+We require that the percentage of aligned reads is 90\% or greater, which we check with samtools flagstat. Prior to variant calling we check for contamination and sample mix up with VerifyBamID and require that the calculated FREEMIX is less than 0.05.
+%Prior to variant calling we check the gender of the samples with GATK3.3+ DepthOfCoverage and require that the ratio between the non-PAR X and Y coverage is less than 2 and greater than 5 for males and females, respectively.

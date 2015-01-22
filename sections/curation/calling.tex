@@ -3,7 +3,9 @@ After deciding on the best software we will carry out variant calling.
 %Datasets generated with unique Illumina chemistry, and those with different coverages will need to be called in separate subsets. GATK3.3+ UnifiedGenotyper (UG) and GATK3.3+ HaplotypeCaller (HC) will be used for calling SNPs from low and high coverage data, respectively. Multiple samples will be called simultaneously with UnifiedGenotyper, whereas HaplotypeCaller will be applied to individual samples in GVCF mode and subsequently joint genotyping will be carried out with GenotypeGVCFs. For compatibility reasons it is important that the same versions of HaplotypeCaller and GenotypeGVCFs are used.
 %http://gatkforums.broadinstitute.org/discussion/5051/are-gatk-versions-3-compatible
 During variant calling UG by default downsamples each sample randomly to a maximum coverage of 250 (--downsampling\_type BY\_SAMPLE and --downsample\_to\_coverage 250). We will use the default minimum base quality for UG, which is currently 17 (--min\_base\_quality\_score 17). %10 for HC
-At each site we don't call more than the 6 best alternate alleles (--max\_alternate\_alleles 6). For high coverage data we use calling and emission thresholds of 30 (--standard\_min\_confidence\_threshold\_for\_calling 30 and --standard\_min\_confidence\_threshold\_for\_emitting 30) in accordance with GATK best practices. For low coverage data we use thresholds of 10 and 4 if the sample count is greater than and less than 100, respectively.
+At each site we don't call more than the 6 best alternate alleles (--max\_alternate\_alleles 6).
+For low coverage data we use calling and emission thresholds (--standard\_min\_confidence\_threshold\_for\_calling and --standard\_min\_confidence\_threshold\_for\_emitting) of 10 and 4 if the sample count is greater than and less than 100, respectively.
+%For high coverage data we use thresholds of 30 in accordance with GATK best practices.
 %Indels will be called with a plethora of software packages (see the next section).
 
 %If pedigree information is available, then this will be used by UnifiedGenotyper %and GenotypeGVCFs
