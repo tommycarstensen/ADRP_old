@@ -1,0 +1,108 @@
+\section{Creation of merged reference panel and additional analysis of data}
+
+In addition to the design of the SNP array we intend to use the data to create a merged reference panel. We will not use IMPUTE2 to create a merged reference panel from existing haplotypes. Instead we will carry out refinement and phasing from the merged filtered variant calls as described in section \ref{sec:curation}, because a larger set of samples will allow more accurate refinement and phasing. The haplotypes will be used for selection of tag SNPs. The further use of this merged reference panel is described below.
+
+In addition to creation and evaluation of the reference panel and design of the SNP array we intend to use the data for additional analyses. Specifically we intend to assess the population structure by calculating principal components, doing cluster analysis and utilising other methods. SNP weights calculated by PCA will also help inform the tag SNP selection process. We intend to calculate allele frequencies and LD patterns, which is necessary for the chip design process. We intend to investigate novelty and do functional annotation of SNPs relative to other sequence datasets and commercial chips, which can aid in the selection of tag SNPs. We intend to asses this across and within populations. The planned analyses are itemized below.
+
+\begin{itemize}
+ \item Generate reference panel using all populations irrespective of sample size
+ \item Generate SNP array with populations that exceed a sample size threshold of 50
+ \item Generate basic descriptive summary statistics for each population before and after genotype refinement; e.g. common and rare SNP count.
+ \item Evaluation of imputation accuracy, when using different reference panels and different SNP arrays of comparable size (e.g. designed array, Affymetrix Affy6.0, Illumina HumanOmniExpress and Illumina MEGA array), by imputation into populations not constituting the chip and by removal of the given population imputed into from the haplotype reference panel.
+ \item Calculate allelele frequencies and LD patterns
+ \begin{itemize}
+  \item Allele frequency in each population for biologically relevant variants and all other variants
+  \item LD patterns and haplotype lengths within populations
+%  \item Haplotype switch error rates, when SNP array data for trios is available - to infer from phasing with different sample sizes - whether increased sample sizes increase phasing accuracy.
+ \end{itemize}
+ \item Assess population structure
+ \begin{itemize}
+  \item Principal component analysis
+  \item Cluster analysis
+  \item {Fixation index ($F_{ST}$) analysis
+  % http://biopython.org/wiki/PopGen_Genepop
+  % http://vcftools.sourceforge.net/documentation.html#fst
+  % https://www.cog-genomics.org/plink2/basic_stats#fst
+  }
+  \item Calculation of IBD within populations to avoid inclusion of related samples in LD calculations among other things.
+  \item Other methods
+ \end{itemize}
+ \item Functional and structural annotation
+  \begin{itemize}
+   \item{VEP annotations}
+   \item{KEGG pathways}
+   \item{Structural interactions within and between proteins
+   %http://www.ensembl.org/info/docs/tools/vep/script/vep_options.html#opt_symbol
+   %http://www.ensembl.org/info/docs/tools/vep/script/vep_options.html#opt_uniprot
+   %http://www.ensembl.org/info/docs/tools/vep/script/vep_options.html#opt_sift
+   %http://www.ensembl.org/info/docs/tools/vep/script/vep_options.html#opt_polyphen
+   %http://www.ensembl.org/info/docs/tools/vep/script/vep_options.html#opt_everything
+   }
+   \item{GERP conservation scores}
+  \end{itemize}
+ \item Novelty and sharing (e.g. $f_2$ variants) relative to sequence datasets and commercial chips
+ \begin{itemize}
+  \item 1000G phase 1 and/or 3; within Africa and globally
+  \item dbSNP138/141+
+  \item AGVP
+  \item SGDP; within Africa and globally
+ \end{itemize}
+ \item{Determination of sex chromosome haplogroups
+ %Supplementary Figure 18 | mtDNA haplogroups in the GoNL samples
+ }
+ \item Identification of SNPs in LD with SNPs in the GWAS catalog to aid in tag SNP selection
+ \item For each population calculate depth at each site and look for discordance with heterzygous chip sites to infer whether selection of tag SNPs from low depth sites should be avoided.
+% \item{Calculate heterozygous chip discordance when calling and refining with different sample sizes to determine whether increased population sizes increase refinement accuracy for African populations}
+ \item {Calculate haplotype switch error rates for populations in which trio SNP array data is available to infer - by phasing with different sample sizes - whether increased sample sizes within and across populations increases phasing accuracy for African populations
+ %Figure S5. Errors in haplotype estimation.
+ }
+% \item{Runs of homozygosity for each population
+ %Supplementary Figure 11 | Runs of homozygosity (ROH) analysis}
+\end{itemize}
+
+
+%1000G phase 1 main:
+%<http://www.nature.com/nature/journal/v491/n7422/pdf/nature11632.pdf>
+
+%Table 1 | Summary of 1000 Genomes Project phase I data
+%Table 2 | Per-individual variant load at conserved sites
+
+
+%1000G phase 1 supp:
+%<http://www.nature.com/nature/journal/v491/n7422/extref/nature11632-s1.pdf>
+%p82 Table S1 Low-coverage sequence coverage
+%p84 Table S3 Samples with OMNI 2.5M genotypes available, phased using family data available
+%p91 Table S10 Cryptic relationships identified by genome-wide SNP analysis (do maxPI_HAT/IBD histogram instead)
+%p92 Table S11 Pairwise estimates of FST
+%p98 Table S15 Number of variants in linkage disequilibrium (LD) with the SNPs in GWAS catalog
+%p101 Figure S3. Sequencing depth and genotyping accuracy
+%p103 Figure S5. Errors in haplotype estimation.
+%Figure S10. Conservation and variation by sequence annotation and variant type.
+
+
+%GoNL main:
+%<http://www.nature.com/ng/journal/v46/n8/pdf/ng.3021.pdf>
+%Figure 1 Discovery of SNVs and structural variation. (a) Venn diagram of all SNVs discovered in GoNL relative to dbSNP (Build 137) and the 1000
+%Genomes Project (1000G) Phase 1 and HapMap CEU panels.
+%Table 1 Individual variant load of coding mutations
+
+
+%GoNL supp:
+%<http://www.nature.com/ng/journal/v46/n8/extref/ng.3021-S1.pdf>
+%Supplementary Figure 2 | Purifying selection per functional annotation and allele frequency
+%p7 Supplementary Figure 3 | Distribution of loss-of-function variants per individual genome
+%p10 Supplementary Figure 6 | Imputation accuracy using different GWAS chips as imputation panels
+%Supplementary Figure 9 | f2 variant sharing between GoNL and 1KG Phase 1 samples
+%Supplementary Figure 14 | Phenotype distributions
+%Supplementary Figure 18 | mtDNA haplogroups in the GoNL samples
+%Supplementary Table 1 | Descriptive statistics of the variants in GoNL
+%Supplementary Table 8 | Summary of genotyping chip data of the GoNL samples
+%Supplementary Table 9 | SNV quality control metrics throughout the calling pipeline
+%Supplementary Table 13 | Variant load per individual
+%Supplementary Table 16 | Fst between provinces and regions
+
+
+%1000G pilot main:
+%<http://www.nature.com/nature/journal/v467/n7319/pdf/nature09534.pdf>
+%Table 1 | Variants discovered by project, type, population and novelty
+%Table 2 | Estimated numbers of potentially functional variants in genes

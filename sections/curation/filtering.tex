@@ -1,4 +1,7 @@
 \subsection{Variant Filtering}
+
+%TODO: For HaplotypeCaller we should check if splitting snps/indels sites into snps and indels yield a greater SNP accuracy rather than salvaging the SNPs from the INDEL-filtered snps/indels sites. Perhaps call SNP and BOTH separately...
+
 Filtering will be carried out with GATK3.3+ VariantRecalibrator, which does variant quality score recalibration (VQSR). VQSR will be applied simultaneously across the autosomes and the sex chromosomes. GATK best practices will be used for filtering SNPs.
 %http://gatkforums.broadinstitute.org/discussion/1259/which-training-sets-arguments-should-i-use-for-running-vqsr
 We will use HapMap III and 1000G phase 1 Omni2.5 sites as truth and training sets (prior probabilities of 15 and 12). High confidence 1000G phase 1 SNPs will be used as an additional training set (prior 10). This dataset does not contain Y chromosome variants. %For indels we will use the Mills and Devine and 1000G gold standard as a truth and training set (prior 12). In both cases
