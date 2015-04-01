@@ -1,6 +1,7 @@
 \subsection{Quality control of SNP array data}
+\label{sec:QCchip}
 %TODO: generate .miss and .multiple from Illumina files and flip according to reference sequence.
-The SNP array data to be used for the haplotype scaffold has to undergo quality control. Some of the data has already undergone QC as part of the AGVP\cite{Gurdasani2015} and 1000G\cite{1000G2012}. Haplotype scaffolds are already publicly available for the 1000G populations. For the remaining new datasets we apply the same QC protocol that was used for the AGVP. We apply the QC individually to each population.
+We will use SNP array data to generate a haplotype scaffold to assist in phasing of the refined sequence data derived genotypes. The SNP array data to be used for the haplotype scaffold has to undergo quality control. Some of the data has already undergone QC as part of the AGVP\cite{Gurdasani2015} and 1000G\cite{1000G2012}. Haplotype scaffolds are already publicly available for the 1000G populations. For the remaining new datasets we apply the same QC protocol that was used for the AGVP. We apply the QC individually to each population.
 
 Low quality variants that map to multiple regions within the human genome or don't map to any region are removed. Duplicate variants genotyped on the chip are also excluded during filtering. We allow variants, which are not at the intersection between different platforms.
 
